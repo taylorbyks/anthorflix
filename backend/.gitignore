@@ -1,0 +1,7 @@
+node_modules/
+.vscode/
+coverage/
+dist/
+
+# Keep environment variables out of version control
+.env
