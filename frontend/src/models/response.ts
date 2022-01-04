@@ -1,4 +1,5 @@
 import { User, MovieApi, MovieApiID } from './index'
+import { Rating } from './rating';
 
 export interface ResponseUsers {
   data: User[]
@@ -13,5 +14,5 @@ export interface ResponseOmdbSearch {
 }
 
 export interface ResponseRatings {
-  data: []
+  data: Rating[]
 }
