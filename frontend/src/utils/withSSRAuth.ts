@@ -11,7 +11,7 @@ interface TokenDecoded {
   role: string
 }
 
-export function withSSRAuth<P>(fn: GetServerSideProps<P>, ...role) {
+export function withSSRAuth<P>(fn: GetServerSideProps<P>) {
   return async (
     context: GetServerSidePropsContext,
   ): Promise<GetServerSidePropsResult<P>> => {
@@ -27,17 +27,6 @@ export function withSSRAuth<P>(fn: GetServerSideProps<P>, ...role) {
     }
 
     api.defaults.headers['Authorization'] = `Bearer ${cookies.token}`
-
-    var decoded: TokenDecoded = jwt_decode(cookies.token)
-
-    if (!role.includes(decoded.role)) {
-      return {
-        redirect: {
-          destination: '/home',
-          permanent: false,
-        },
-      }
-    }
 
     return await fn(context)
   }

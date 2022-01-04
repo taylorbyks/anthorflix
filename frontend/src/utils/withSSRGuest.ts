@@ -14,7 +14,7 @@ export function withSSRGuest<P>(fn: GetServerSideProps<P>) {
     if (cookies.token) {
       return {
         redirect: {
-          destination: '/predictions',
+          destination: '/home',
           permanent: false,
         },
       }
