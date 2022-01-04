@@ -6,7 +6,6 @@ import {
   Heading,
   HStack,
   SimpleGrid,
-  useColorModeValue,
   useToast,
   VStack,
 } from '@chakra-ui/react'
