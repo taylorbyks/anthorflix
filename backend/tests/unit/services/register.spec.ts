@@ -16,7 +16,7 @@ describe('Create new user', () => {
   it('Should be return created user', async () => {
     const user = await registerService.create({
       name: 'Teste',
-      email: 'testeUnit@teste.com',
+      email: 'testeUnitRegister@teste.com',
       password: '123456',
     })
 
@@ -25,7 +25,7 @@ describe('Create new user', () => {
     expect(user).toHaveProperty('name')
     expect(user.name).toEqual('Teste')
     expect(user).toHaveProperty('email')
-    expect(user.email).toEqual('testeUnit@teste.com')
+    expect(user.email).toEqual('testeUnitRegister@teste.com')
     expect(user).toHaveProperty('password')
     expect(user).toHaveProperty('created_at')
 
@@ -38,7 +38,7 @@ describe('Create new user with registered email', () => {
     try {
     await registerService.create({
       name: 'Teste',
-      email: 'testeUnit@teste.com',
+      email: 'testeUnitRegister@teste.com',
       password: '123456',
     })
   } catch (error) {

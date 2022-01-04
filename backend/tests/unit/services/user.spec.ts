@@ -8,7 +8,7 @@ beforeAll(async () => {
   try {
     const user = await registerService.create({
       name: 'Teste',
-      email: 'testeUnit@teste.com',
+      email: 'testeUnitUser@teste.com',
       password: '123456',
     })
     id = user.id
@@ -38,7 +38,7 @@ describe('Get one user', () => {
     expect(user).toHaveProperty('name')
     expect(user.name).toEqual('Teste')
     expect(user).toHaveProperty('email')
-    expect(user.email).toEqual('testeUnit@teste.com')
+    expect(user.email).toEqual('testeUnitUser@teste.com')
     expect(user).toHaveProperty('password')
     expect(user).toHaveProperty('created_at')
   })

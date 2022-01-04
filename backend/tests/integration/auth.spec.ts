@@ -1,6 +1,38 @@
 import app from '../../src/app'
 import request from 'supertest'
-import { token } from './login.spec'
+import { LoginService, RegisterService, UserService } from '../../src/services'
+
+var id: string
+var token: string
+const loginService = new LoginService()
+const registerService = new RegisterService()
+const userService = new UserService()
+
+beforeAll(async () => {
+  try {
+    const user = await registerService.create({
+      name: 'Teste',
+      email: 'testeIntAuth@teste.com',
+      password: '123456',
+    })
+    id = user.id
+
+    token = await loginService.login({
+      email: 'testeIntAuth@teste.com',
+      password: '123456',
+    })
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+afterAll(async () => {
+  try {
+    await userService.delete(id)
+  } catch (error) {
+    console.log(error)
+  }
+})
 
 describe('Make request with admin token', () => {
   it('Should be return authorized', async () => {

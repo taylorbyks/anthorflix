@@ -13,7 +13,7 @@ beforeAll(async () => {
   try {
     const user = await registerService.create({
       name: 'Teste',
-      email: 'testeUnit@teste.com',
+      email: 'testeUnitProfile@teste.com',
       password: '123456',
     })
     id = user.id

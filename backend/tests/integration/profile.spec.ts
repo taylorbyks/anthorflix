@@ -1,25 +1,46 @@
 import app from '../../src/app'
 import request from 'supertest'
-import { token } from './login.spec'
+import { RegisterService, UserService, LoginService } from '../../src/services'
 
-describe('Update user', () => {
-  it('Should be return updated user', async () => {
-    const response = await request(app)
-      .put(`/profile`)
-      .set('Authorization', `Bearer ${token}`)
-      .send({
-        name: 'Teste2',
-        email: 'teste2@teste.com',
-        password: '1234567',
-      })
+var id: string
+var secondId: string
+var token: string
+const loginService = new LoginService()
+const registerService = new RegisterService()
+const userService = new UserService()
 
-    expect(response.status).toBe(200)
-    expect(response.body).toBeInstanceOf(Object)
-    expect(response.body).toHaveProperty('name')
-    expect(response.body.name).toBe('Teste2')
-    expect(response.body.email).toBe('teste2@teste.com')
-    expect(response.body).toHaveProperty('email')
-  })
+beforeAll(async () => {
+  try {
+    const user = await registerService.create({
+      name: 'Teste',
+      email: 'testeIntProfile@teste.com',
+      password: '123456',
+    })
+    id = user.id
+
+    const secondUser = await registerService.create({
+      name: 'Teste',
+      email: 'teste1@teste.com',
+      password: '123456',
+    })
+    secondId = secondUser.id
+
+    token = await loginService.login({
+      email: 'testeIntProfile@teste.com',
+      password: '123456',
+    })
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+afterAll(async () => {
+  try {
+    await userService.delete(id)
+    await userService.delete(secondId)
+  } catch (error) {
+    console.log(error)
+  }
 })
 
 describe('Update user', () => {
@@ -28,14 +49,14 @@ describe('Update user', () => {
       .put(`/profile`)
       .set('Authorization', `Bearer ${token}`)
       .send({
-        email: 'teste@teste.com',
-        password: '123456',
+        name: 'Teste2',
+        password: '1234567',
       })
 
     expect(response.status).toBe(200)
     expect(response.body).toBeInstanceOf(Object)
     expect(response.body).toHaveProperty('name')
-    expect(response.body.email).toBe('teste@teste.com')
+    expect(response.body.name).toBe('Teste2')
     expect(response.body).toHaveProperty('email')
   })
 })
@@ -53,7 +74,6 @@ describe('Update user', () => {
     expect(response.body).toBeInstanceOf(Object)
     expect(response.body).toHaveProperty('name')
     expect(response.body.name).toBe('Teste')
-    expect(response.body.email).toBe('teste@teste.com')
     expect(response.body).toHaveProperty('email')
   })
 })
