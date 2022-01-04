@@ -12,7 +12,7 @@
     "@chakra-ui/core": "^0.8.0",
     "@chakra-ui/react": "^1.6.12",
     "@emotion/react": "^11.5.0",
-    "@emotion/styled": "^11.3.0",
+    "@emotion/styled": "^11.6.0",
     "@hookform/resolvers": "^2.8.2",
     "axios": "^0.23.0",
     "framer-motion": "^4.1.17",
