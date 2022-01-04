@@ -4,6 +4,7 @@ import { LoginService, RegisterService, UserService } from '../../src/services'
 
 var id: string
 var token: string
+var registerId: string
 const loginService = new LoginService()
 const registerService = new RegisterService()
 const userService = new UserService()
@@ -29,6 +30,7 @@ beforeAll(async () => {
 afterAll(async () => {
   try {
     await userService.delete(id)
+    await userService.delete(registerId)
   } catch (error) {
     console.log(error)
   }
@@ -48,7 +50,7 @@ describe('Create new user', () => {
     expect(response.body).toHaveProperty('name')
     expect(response.body).toHaveProperty('email')
 
-    id = response.body.id
+    registerId = response.body.id
   })
 })
 
