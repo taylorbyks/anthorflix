@@ -25,6 +25,7 @@ import MoviesList from '../../components/MovieList'
 import { Movie } from '../../models'
 import api from '../../services/api'
 import omdbApi from '../../services/omdbApi'
+import { withSSRAuth } from '../../utils/withSSRAuth'
 
 export default function Users() {
   const toast = useToast()
@@ -33,7 +34,7 @@ export default function Users() {
   const [search, setSearch] = useState('')
   const [score, setScore] = useState(10)
   const [movieId, setMovieId] = useState('')
-  const [comment, setComment] = useState('')
+  const [review, setReview] = useState('')
 
   function openModal(id: string, movie: string) {
     setMovie(movie)
@@ -48,10 +49,10 @@ export default function Users() {
   const handleSendRating = async () => {
     onClose()
     try {
-      await api.post('/rating', {
+      await api.post('/ratings', {
         movie: movieId,
         score,
-        comment,
+        review,
       })
 
       return toast({
@@ -61,6 +62,11 @@ export default function Users() {
         position: 'bottom-right',
       })
     } catch (error) {
+      console.log(error, {
+        movie: movieId,
+        score: parseInt(score),
+        review,
+      })
       return toast({
         title: 'Erro ao enviar avaliação',
         description: error.response.data.error,
@@ -119,7 +125,7 @@ export default function Users() {
               defaultValue={10}
               min={0}
               max={10}
-              step={0}
+              step={1}
               w="95%"
             >
               <SliderTrack>
@@ -139,7 +145,7 @@ export default function Users() {
                 bg: 'gray.900',
               }}
               size="lg"
-              onChange={e => setComment(e.target.value)}
+              onChange={e => setReview(e.target.value)}
             />
           </ModalBody>
           <ModalFooter>
