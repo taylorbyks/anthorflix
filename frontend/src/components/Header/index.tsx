@@ -4,15 +4,19 @@ import { useSidebarDrawer } from '../../contexts/SidebarDrawerContext'
 import { Logo } from '../Logo'
 import { ButtonsNav } from './ButtonsNav'
 import { Profile } from './Profile'
+import { Search } from './Search'
 
-export function Header() {
+interface HeaderProps {
+  search?: any
+}
+
+export function Header({ search = false }: HeaderProps) {
   const { onOpen } = useSidebarDrawer()
 
-  const isWideVersion =
-    useBreakpointValue({
-      base: false,
-      lg: true,
-    })
+  const isWideVersion = useBreakpointValue({
+    base: false,
+    lg: true,
+  })
 
   return (
     <Flex
@@ -25,18 +29,19 @@ export function Header() {
       px="6"
       align="center"
     >
-        <IconButton
-          aria-label="Open navigation"
-          icon={<Icon as={RiMenuLine} />}
-          fontSize="24"
-          variant="unstyled"
-          onClick={onOpen}
-          mr="2"
-        ></IconButton>
+      <IconButton
+        aria-label="Open navigation"
+        icon={<Icon as={RiMenuLine} />}
+        fontSize="24"
+        variant="unstyled"
+        onClick={onOpen}
+        mr="8"
+      ></IconButton>
       <Logo />
-      <Flex ml="auto" align="center">
+      {search && <Search setSearch={search} />}
+      <Flex ml="auto" justify="center">
         <ButtonsNav />
-        <Profile showProfileData={isWideVersion}/>
+        <Profile showProfileData={isWideVersion} />
       </Flex>
     </Flex>
   )
