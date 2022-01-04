@@ -7,7 +7,7 @@
   "scripts": {
     "start": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "seed": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn config/seed.ts",
-    "test": "ts-node-dev --ignore-watch node_modules config/seed.ts && jest && istanbul-badges-readme",
+    "test": "jest && istanbul-badges-readme",
     "build": "tsc && node dist/src/server.js"
   },
   "dependencies": {
