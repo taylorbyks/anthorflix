@@ -64,7 +64,7 @@ export default function Users() {
     } catch (error) {
       console.log(error, {
         movie: movieId,
-        score: parseInt(score),
+        score,
         review,
       })
       return toast({
