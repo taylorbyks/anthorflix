@@ -8,7 +8,8 @@
     "start": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "seed": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn config/seed.ts",
     "test": "jest && istanbul-badges-readme",
-    "build": "tsc && node dist/src/server.js"
+    "docker-test": "npx prisma migrate deploy && jest",
+    "build": "npx prisma migrate deploy && tsc && node dist/src/server.js"
   },
   "dependencies": {
     "@prisma/client": "^3.7.0",
