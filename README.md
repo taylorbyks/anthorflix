@@ -1,4 +1,7 @@
-# Anthorflix
+<p align="center" width="100%">
+<img alt="logo" src="frontend\public\logo.png">
+</p>
+
 ![Statements](https://img.shields.io/badge/statements-100%25-brightgreen.svg?style=flat)
 ![Branches](https://img.shields.io/badge/branches-100%25-brightgreen.svg?style=flat)
 ![Functions](https://img.shields.io/badge/functions-100%25-brightgreen.svg?style=flat)
@@ -13,13 +16,14 @@ git clone https://github.com/taylorbyks/anthorflix.git
 ```
 
 - Inicialização rápida com docker
-Para facilitar a inicializaçao deixei o dotenv
-Ao rodar o comando é criado 3 containers (Postgres, Backend e Frontend)
+  Para facilitar a inicialização deixei o dotenv
+  Ao rodar o comando é criado 3 containers (Postgres, Backend e Frontend)
 
 ```
 cd anthorflix
 docker-compose up
 ```
+
 ### Para acessar
 
 Frontend: localhost:3333
@@ -29,48 +33,53 @@ Backend: localhost:3000
 
 ### Requisitos desenvolvidos:
 
-- CRUD Usuários
-  - É possivel atualizar apenas o seu usuário garantindo uma segurança.
 - Avaliar Filmes
-  - Rota protegida (é necessario enviar o token para fazer a requisição).
-  - O sistema de avaliçao é atraves de um nota de 0 a 10
-  - É possivel dar uma nota e escrever um comentário.
-  - É salva a referencia do usuário que fez o comentário e o id do filme.
+  - Rota protegida (é necessário enviar o token para fazer a requisição).
+  - O sistema de avaliação é através de uma nota de 0 a 10
+  - É possível dar uma nota e escrever um comentário.
+  - É salva a referência do usuário que fez o comentário e o id do filme.
 - Ver Avaliações
-  - Rota protegida (é necessario enviar o token para fazer a requisição).
-  - É possivel ver as minhas avaliações e deletar avaliaçoes.
+  - Rota protegida (é necessário enviar o token para fazer a requisição).
+  - É possível ver as minhas avaliações e deletar avaliações.
 - CRUD Avaliações
-  - É possivel atualizar apenas o seu usuário garantindo uma segurança.
+  - É possível atualizar apenas o seu usuário garantindo uma segurança.
 - Cadastro de usuário
   - Foi implementado uma rota para o cadastrar um usuário.
+- CRUD Usuários
+  - É possível atualizar apenas o seu usuário garantindo uma segurança.
 - Autenticação
   - Ao fazer um login é retornado um JWT com expiração de 1 dia.
 - Banco de dados Postgres
 - Docker e docker-compose
-- Testes de integraçao e testes unitarios
+- Testes de integração e testes unitários
 
-### Requsitos a desenvolver ou melhorar
+### Requisitos a desenvolver ou melhorar
+
 - Cadastrar filmes assistidos
+  - Adicionar um campo 'watched' no usuário, onde seria um array com os ids de filmes assistidos.
 - Permitir comentar as avaliações
+  - Criar uma tabela de comentários que salva a avaliação, o usuário que comentou e o comentário. Tendo assim a referência.
 - Calcular a média das avaliações de um filme
+  - Seria necessário gravar os filmes em banco, no momento eles não são gravados.
+- Melhorar testes nas avaliações para aumentar o coverange
 
 ### Tecnologias usadas:
 
 - #### NodeJS com Express e Typescript
 - #### PostgreSQL
 
-#### Dependencias
+#### Dependências
 
 - Jest, Supertest (Efetuar testes de integração)
 - Prisma ORM (Realizar conexão e operações no banco)
 - JWT (Criar tokens de autenticação)
 - Criptojs (Encodar e gerar hashes para proteger senhas)
-- Prettier (Formatador de codigo para consistencia e padrão no código)
+- Prettier (Formatador de código para consistência e padrão no código)
 - Istanbul Badges (Adicionar badges do teste no readme)
 
 ### Comandos
 
-- Instalar dependencias
+- Instalar dependências
 
 ```
 yarn
@@ -81,6 +90,10 @@ yarn
 ```
 yarn prisma migrate dev
 ```
+ou
+```
+yarn prisma migrate deploy
+```
 
 - Limpar as migrations executadas no banco
 
@@ -88,10 +101,16 @@ yarn prisma migrate dev
 yarn prisma migrate reset
 ```
 
-- Inicar aplicação
+- Inciar aplicação
 
 ```
 yarn start
+```
+
+- Build da aplicação
+
+```
+yarn build
 ```
 
 - Executar testes
@@ -100,13 +119,13 @@ yarn start
 yarn test
 ```
 
-- Vizualizar o banco de dados
+- Visualizar o banco de dados
 
 ```
 yarn prisma studio
 ```
 
-### Váriaveis de Ambiente (.env)
+### Variáveis de Ambiente (.env)
 
 ```
 DB_HOST=
@@ -118,6 +137,7 @@ POSTGRES_DB=
 DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DB_HOST}:${DB_PORT}/${POSTGRES_DB}?schema=${DB_SCHEMA}&sslmode=prefer
 TOKEN_SECRET=
 PORT=
+VERSION=
 ```
 
 ## Frontend
@@ -126,34 +146,38 @@ PORT=
 
 - Listar Filmes
   - Feito com uma integração com a API do OMDB.
-  - É necessario buscar pelo nome do filme para que comecem a aparecer filmes
+  - É necessário buscar pelo nome do filme para que comecem a aparecer filmes
   - a API do OMDB não fornece tantos detalhes ao buscar por um nome de um filme, os campos que aparecem na listagem são: Titulo, Ano, Poster
 - Avaliar Filmes
-  - É possivel dar uma nota e escrever um comentário.
+  - É possível dar uma nota e escrever um comentário.
 - Ver Avaliações
-  - É possivel ver as minhas avaliações e deletar avaliaçoes.
+  - É possível ver as minhas avaliações e deletar avaliações.
 - Cadastro de usuário
-  - Foi implementado um formulario com validações que permite cadastrar um usuário
+  - Foi implementado um formulário com validações que permite cadastrar um usuário
 - Login
-  - Ao fazer o login é retornado um JWT que é armazenado nos cookies do navegador
-  - Foi implementado um broadcast de signout, ou seja, caso tenha mais de uma guia, ao fazer o logout todas as guias recebem o evento e fazem o logout tambem.
-  - As telas internas do sistema sao protegidas pelo server-side que obriga estar autenticado para acessar.
+  - Ao fazer o login é retornado um JWT armazenado nos cookies do navegador
+  - Foi implementado um broadcast de signout, ou seja, caso tenha mais de uma guia, ao fazer o logout todas as guias recebem o evento e fazem o logout também.
+  - As telas internas do sistema são protegidas pelo server-side que obriga estar autenticado para acessar.
 - Docker e docker-compose
 
-### Requsitos a desenvolver ou melhorar
+### Requisitos a desenvolver ou melhorar
+
 - Cadastrar filmes assistidos.
 - Permitir editar os dados da conta logada.
+  - Já foi implementado no backend
 - Permitir comentar as avaliações.
+- Permitir editar as avaliações.
+  - Já foi implementado no backend
 - Mostrar a média das avaliações de um filme.
 - Criar testes.
-- Trocar a API de filmes. Inicialmente optei pela API do OMDB pois era mais simples, um grande equivoco pois deveria ter estudado mais a respeito de ambas as API's. como melhoria eu trocaria a API pois ela nao esta sanando todos os requisitos.
+- Trocar a API de filmes e gravar os filmes em banco. Inicialmente optei pela API do OMDB, pois era mais simples, um grande equivoco, pois, deveria ter estudado mais a respeito de ambas as API's. como melhoria eu trocaria a API, pois ela não esta sanando todos os requisitos.
 
 ### Tecnologias usadas:
 
 - #### ReactJS com o framework NextJS
-O NextJS utiliza o conceito de SSR (Server Side Rendering), oferecendo mais performance, consistência e tempo de carregamento mais eficiente em comparação a uma SPA tradicional
+  O NextJS utiliza o conceito de SSR (Server Side Rendering), oferecendo mais desempenho, consistência e tempo de carregamento mais eficiente em comparação a uma SPA tradicional
 
-#### Dependencias
+#### Dependências
 
 - ChackraUI (Biblioteca de UI)
 - Axios (Realizar requisições)
@@ -165,7 +189,7 @@ O NextJS utiliza o conceito de SSR (Server Side Rendering), oferecendo mais perf
 
 ### Comandos
 
-- Instalar dependencias
+- Instalar dependências
 
 ```
 yarn
@@ -189,8 +213,7 @@ yarn dev
 yarn start
 ```
 
-### Váriaveis de Ambiente (.env)
+### Variáveis de Ambiente (.env)
 
 ```
 NEXT_PUBLIC_OMDB_API_KEY=
-```
