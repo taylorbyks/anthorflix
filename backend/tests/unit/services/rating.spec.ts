@@ -102,14 +102,14 @@ describe('Get ratings from user', () => {
 
 describe('Delete one rating', () => {
   it('Should be return no content', async () => {
-    await ratingService.delete(ratingId)
+    await ratingService.delete(ratingId, id)
   })
 })
 
 describe('Delete rating with wrong id', () => {
   it('Should be return error', async () => {
     try {
-      await ratingService.delete(ratingId)
+      await ratingService.delete(ratingId, id)
     } catch (error) {
       expect(error).toBeInstanceOf(Error)
     }

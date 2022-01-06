@@ -54,7 +54,7 @@ RatingController.delete(
   async (request: Request, response: Response) => {
     try {
       const { id } = request.params
-      await ratingService.delete(id)
+      await ratingService.delete(id, request.user.id)
 
       return response.sendStatus(204)
     } catch (error) {

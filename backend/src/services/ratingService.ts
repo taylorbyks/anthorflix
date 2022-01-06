@@ -5,12 +5,19 @@ const prisma = new PrismaClient()
 
 export class RatingService {
   async getAll(): Promise<Rating[]> {
-    return await prisma.rating.findMany()
+    return await prisma.rating.findMany({
+      include: {
+        user: true,
+      },
+    })
   }
 
   async getAllFromUser(id: string): Promise<Rating[]> {
     const ratings = await prisma.rating.findMany({
       where: { user_fk: id },
+      include: {
+        user: true,
+      },
     })
 
     if (!ratings) {
@@ -53,12 +60,12 @@ export class RatingService {
     return updatetedRating
   }
 
-  async delete(id: string) {
+  async delete(id: string, userId: string) {
     const rating = await prisma.rating.findUnique({
-      where: { id: id },
+      where: { id },
     })
 
-    if (!rating) {
+    if (!rating || rating.user_fk !== userId) {
       throw new Error('Avaliação não encontrado')
     }
 
