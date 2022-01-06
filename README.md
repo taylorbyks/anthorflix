@@ -21,13 +21,13 @@ git clone https://github.com/taylorbyks/anthorflix.git
 
 ```
 cd anthorflix
-docker-compose up
+docker-compose build && docker-compose up
 ```
 
 ### Para acessar
 
-Frontend: localhost:3333
-Backend: localhost:3000
+#### Frontend: localhost:3333
+#### Backend: localhost:3000
 
 ## Backend
 
