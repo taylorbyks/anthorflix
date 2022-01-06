@@ -1,4 +1,8 @@
-import { LoginService, RegisterService, UserService } from '../../../src/services'
+import {
+  LoginService,
+  RegisterService,
+  UserService,
+} from '../../../src/services'
 
 var id: string
 const loginService = new LoginService()
@@ -13,17 +17,13 @@ beforeAll(async () => {
       password: '123456',
     })
     id = user.id
-  } catch (error) {
-    console.log(error)
-  }
+  } catch (error) {}
 })
 
 afterAll(async () => {
   try {
     await userService.delete(id)
-  } catch (error) {
-    console.log(error)
-  }
+  } catch (error) {}
 })
 
 describe('Make login', () => {
@@ -40,12 +40,12 @@ describe('Make login', () => {
 describe('Create new login with registered email', () => {
   it('Should be return error', async () => {
     try {
-    await loginService.login({
-      email: 'testeUnitLogin@teste.com',
-      password: '1234',
-    })
-  } catch (error) {
-    expect(error).toBeInstanceOf(Error)
-  }
+      await loginService.login({
+        email: 'testeUnitLogin@teste.com',
+        password: '1234',
+      })
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error)
+    }
   })
 })

@@ -22,17 +22,13 @@ beforeAll(async () => {
       email: 'testeIntRating@teste.com',
       password: '123456',
     })
-  } catch (error) {
-    console.log(error)
-  }
+  } catch (error) {}
 })
 
 afterAll(async () => {
   try {
     await userService.delete(id)
-  } catch (error) {
-    console.log(error)
-  }
+  } catch (error) {}
 })
 
 describe('Create new rating', () => {

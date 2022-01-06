@@ -22,18 +22,14 @@ beforeAll(async () => {
       email: 'testeIntRegister@teste.com',
       password: '123456',
     })
-  } catch (error) {
-    console.log(error)
-  }
+  } catch (error) {}
 })
 
 afterAll(async () => {
   try {
     await userService.delete(id)
     await userService.delete(registerId)
-  } catch (error) {
-    console.log(error)
-  }
+  } catch (error) {}
 })
 
 describe('Create new user', () => {

@@ -13,7 +13,7 @@ beforeAll(async () => {
     })
     id = user.id
   } catch (error) {
-    console.log(error)
+
   }
 })
 

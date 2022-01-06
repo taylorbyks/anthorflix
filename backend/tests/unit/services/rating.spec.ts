@@ -18,17 +18,13 @@ beforeAll(async () => {
       password: '123456',
     })
     id = user.id
-  } catch (error) {
-    console.log(error)
-  }
+  } catch (error) {}
 })
 
 afterAll(async () => {
   try {
     await userService.delete(id)
-  } catch (error) {
-    console.log(error)
-  }
+  } catch (error) {}
 })
 
 describe('Create new rating', () => {

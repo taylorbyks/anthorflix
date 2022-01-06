@@ -8,7 +8,7 @@ afterAll(async () => {
   try {
     await userService.delete(id)
   } catch (error) {
-    console.log(error)
+
   }
 })
 
