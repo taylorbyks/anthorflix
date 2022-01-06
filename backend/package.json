@@ -8,15 +8,15 @@
     "start": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "seed": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn config/seed.ts",
     "test": "jest && istanbul-badges-readme",
-    "build": "npx prisma migrate deploy && tsc && node dist/src/server.js"
+    "build": "tsc && node dist/src/server.js"
   },
   "dependencies": {
-    "@prisma/client": "^3.4.0",
+    "@prisma/client": "^3.7.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "prisma": "^3.4.0"
+    "prisma": "^3.7.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
