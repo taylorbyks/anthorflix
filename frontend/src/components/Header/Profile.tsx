@@ -14,8 +14,8 @@ export function Profile({ showProfileData, src }: ProfileProps) {
     <Flex align="center">
       {showProfileData && (
         <Box m="4" textalign="rigth">
-          <Text>{user.name}</Text>
-          <Text color='gray.300'>
+          <Text color='gray.100'>{user.name}</Text>
+          <Text color='gray.400'>
             {user.email}
           </Text>
         </Box>

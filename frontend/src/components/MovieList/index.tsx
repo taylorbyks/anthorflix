@@ -9,7 +9,7 @@ interface MoviesListProps {
   error?: any
 }
 
-export default function MoviesList({
+export function MoviesList({
   movies = [],
   isLoading = false,
   error = false,
@@ -43,11 +43,7 @@ export default function MoviesList({
   }
 
   return (
-    <Box
-      flex="1"
-      borderRadius={8}
-      p="8"
-    >
+    <Box flex="1" borderRadius={8} p="8">
       {movies.map(movie => (
         <MovieCard key={movie.imdbID} {...movie} />
       ))}

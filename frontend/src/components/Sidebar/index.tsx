@@ -17,7 +17,7 @@ export function Sidebar() {
       <DrawerOverlay>
         <DrawerContent bg="gray.700" p="4">
           <DrawerCloseButton mt="6" />
-          <DrawerHeader>Menu</DrawerHeader>
+          <DrawerHeader color="white">Menu</DrawerHeader>
           <DrawerBody>
             <SidebarNav />
           </DrawerBody>

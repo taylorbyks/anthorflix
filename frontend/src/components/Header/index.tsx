@@ -36,6 +36,7 @@ export function Header({ search = false }: HeaderProps) {
         variant="unstyled"
         onClick={onOpen}
         mr="8"
+        color="white"
       ></IconButton>
       <Logo />
       {search && <Search setSearch={search} />}
