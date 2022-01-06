@@ -1,43 +1,13 @@
-import {
-  Flex,
-  Box,
-  Button,
-  Icon,
-  ModalBody,
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalFooter,
-  ModalCloseButton,
-  ModalHeader,
-  Stack,
-  useToast,
-  FormLabel,
-  Image,
-  Heading,
-  Text,
-  Slider,
-  Textarea,
-  SliderTrack,
-  SliderFilledTrack,
-  SliderThumb,
-} from '@chakra-ui/react'
-import { RiAddLine, RiEditLine } from 'react-icons/ri'
-import { Header, Sidebar } from '../../components'
-import Link from 'next/link'
-import { AuthContext } from '../../contexts/AuthContext'
-import { ReactNode } from 'toasted-notes/node_modules/@types/react'
-import api from '../../services/api'
-import { useState, useContext, useEffect } from 'react'
+import { Box, Flex, Stack, Text } from '@chakra-ui/react'
 import { useQuery } from 'react-query'
-import { User, ResponseUsers, Movie, ResponseRatings } from '../../models'
-import { withSSRAuth } from '../../utils/withSSRAuth'
+import { Header, MoviesList, Sidebar, Stars } from '../../components'
+import { Movie, ResponseRatings } from '../../models'
+import api from '../../services/api'
 import omdbApi from '../../services/omdbApi'
-import MoviesList from '../../components/MovieList'
+import { withSSRAuth } from '../../utils/withSSRAuth'
 
 export default function Users() {
-  const { data, isLoading, error } = useQuery('movies', async () => {
+  const { data, isLoading, error } = useQuery('ratings', async () => {
     const response: ResponseRatings = await api.get('/ratings')
 
     const movies = Promise.all(
@@ -50,11 +20,13 @@ export default function Users() {
           imdbID: movie.imdbID,
           description: movie.Plot,
           footer: (
-            <>
-              <Text color="white">Avaliação de: {rating.user.name}</Text>
-              <Text color="white">"{rating.review}"</Text>
-              <Text color="yellow">Nota: {rating.score}</Text>
-            </>
+            <Box flex="1" align="center">
+              <Stack spacing="2" align="center">
+                <Text color="white">"{rating.review}"</Text>
+                <Stars score={rating.score} />
+                <Text color="white">Avaliação de: {rating.user.name}</Text>
+              </Stack>
+            </Box>
           ),
         } as Movie
       }),
@@ -74,8 +46,8 @@ export default function Users() {
   )
 }
 
-// export const getServerSideProps = withSSRAuth(async context => {
-//   return {
-//     props: {},
-//   }
-// })
+export const getServerSideProps = withSSRAuth(async context => {
+  return {
+    props: {},
+  }
+})
