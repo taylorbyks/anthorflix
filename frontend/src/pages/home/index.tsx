@@ -18,10 +18,9 @@ import {
   useDisclosure,
   useToast,
 } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useQuery } from 'react-query'
-import { Header, Sidebar } from '../../components'
-import MoviesList from '../../components/MovieList'
+import { Header, Sidebar, MoviesList } from '../../components'
 import { Movie } from '../../models'
 import api from '../../services/api'
 import omdbApi from '../../services/omdbApi'
@@ -42,10 +41,6 @@ export default function Users() {
     onOpen()
   }
 
-  useEffect(() => {
-    refetch()
-  })
-
   const handleSendRating = async () => {
     onClose()
     try {
@@ -54,6 +49,9 @@ export default function Users() {
         score,
         review,
       })
+
+      setScore(10)
+      setReview('')
 
       return toast({
         title: 'Avaliaçao enviada',
@@ -78,8 +76,8 @@ export default function Users() {
     }
   }
 
-  const { data, isLoading, error, refetch } = useQuery('movies', async () => {
-    const response = await omdbApi.search(search)
+  const { data, isLoading, error, refetch } = useQuery(['movies', search], async (context) => {
+    const response = await omdbApi.search(context.queryKey[1])
 
     const movies = response.Search.map(movie => {
       if (movie.Poster) {
@@ -114,8 +112,8 @@ export default function Users() {
       </Flex>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Avaliar {movie}</ModalHeader>
+        <ModalContent bg="gray.800">
+          <ModalHeader color="gray.100">Avaliar {movie}</ModalHeader>
           <ModalCloseButton />
           <ModalBody align="center">
             <FormLabel color="gray.100">Nota</FormLabel>
@@ -139,7 +137,7 @@ export default function Users() {
             <Textarea
               focusBorderColor="green.500"
               color="white"
-              bg="gray.800"
+              bg="gray.700"
               variant="filled"
               _hover={{
                 bg: 'gray.900',
@@ -161,8 +159,8 @@ export default function Users() {
   )
 }
 
-// export const getServerSideProps = withSSRAuth(async context => {
-//   return {
-//     props: {},
-//   }
-// })
+export const getServerSideProps = withSSRAuth(async context => {
+  return {
+    props: {},
+  }
+})
