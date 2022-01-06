@@ -2,7 +2,7 @@ import axios from 'axios'
 import { MovieApiID, ResponseOmdbSearch } from '../models'
 
 const omdbApi = {
-  async search(name: string) {
+  async search(name) {
     const { data } = await axios.get(
       `https://www.omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_OMDB_API_KEY}&s=${name}&type=movie`,
     )
