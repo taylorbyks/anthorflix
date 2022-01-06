@@ -1,4 +1,6 @@
-FROM node:16-alpine
+FROM node:lts
+
+RUN apt-get -qy update && apt-get -qy install openssl
 
 COPY . .
 

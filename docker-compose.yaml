@@ -1,5 +1,8 @@
 version: '3.7'
 
+networks:
+  anthorflix:
+
 services:
   frontend:
     container_name: frontend
@@ -10,9 +13,10 @@ services:
       - 3333:3333
     expose:
       - 3333
-    restart: always
     depends_on:
       - backend
+    networks:
+      - anthorflix
   backend:
     container_name: backend
     build:
@@ -22,15 +26,11 @@ services:
       - 3000:3000
     expose:
       - 3000
-    restart: always
-    depends_on:
-      - postgres
     networks:
-      - backend
+      - anthorflix
   postgres:
     container_name: postgres
     image: postgres
-    restart: always
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -39,7 +39,4 @@ services:
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
-      - backend
-
-networks:
-  backend:
+      - anthorflix
