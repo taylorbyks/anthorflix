@@ -1,4 +1,4 @@
-FROM node:lts
+FROM node:lts as base
 
 RUN apt-get -qy update && apt-get -qy install openssl
 
@@ -8,8 +8,4 @@ WORKDIR /
 
 RUN npm i
 
-EXPOSE 3000
-
 ENV DB_HOST=postgres
-
-CMD ["npm", "run", "build"]

@@ -1,8 +1,5 @@
 version: '3.7'
 
-networks:
-  anthorflix:
-
 services:
   frontend:
     container_name: frontend
@@ -15,19 +12,18 @@ services:
       - 3333
     depends_on:
       - backend
-    networks:
-      - anthorflix
   backend:
     container_name: backend
     build:
       context: ./backend
       dockerfile: Dockerfile
+    command: npm run build
     ports:
       - 3000:3000
     expose:
       - 3000
-    networks:
-      - anthorflix
+    depends_on:
+      - postgres
   postgres:
     container_name: postgres
     image: postgres
@@ -36,7 +32,3 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - '5432:5432'
-    volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    networks:
-      - anthorflix
