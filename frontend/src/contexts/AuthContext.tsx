@@ -106,6 +106,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       isAuthenticated = true
 
+      getUser()
+
       Router.push('/home')
 
     } catch (error) {
