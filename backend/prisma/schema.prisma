@@ -9,22 +9,33 @@ generator client {
 }
 
 model User {
-  id         String   @id @default(uuid())
+  id         String    @id @default(uuid())
   name       String
   password   String
-  email      String   @unique
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  email      String    @unique
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
   ratings    Rating[]
+  Comment    Comment[]
 }
 
 model Rating {
-  id         String   @id @default(uuid())
+  id         String    @id @default(uuid())
   movie      String
-  user       User     @relation(fields: [user_fk], references: [id])
+  user       User      @relation(fields: [user_fk], references: [id])
   user_fk    String
   score      Int
   review     String
+  Comment    Comment[]
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+}
+
+model Comment {
+  id         String   @id @default(uuid())
+  rating     Rating   @relation(fields: [rating_fk], references: [id])
+  rating_fk  String
+  user       User     @relation(fields: [user_fk], references: [id])
+  user_fk    String
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
 }
