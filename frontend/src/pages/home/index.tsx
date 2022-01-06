@@ -60,11 +60,6 @@ export default function Users() {
         position: 'bottom-right',
       })
     } catch (error) {
-      console.log(error, {
-        movie: movieId,
-        score,
-        review,
-      })
       return toast({
         title: 'Erro ao enviar avaliação',
         description: error.response.data.error,

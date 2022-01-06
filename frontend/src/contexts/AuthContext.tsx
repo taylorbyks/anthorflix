@@ -31,8 +31,6 @@ let authChannel: BroadcastChannel
 export const AuthContext = createContext({} as AuthContextData)
 
 export function signOut() {
-  console.log('Logout')
-
   destroyCookie(undefined, 'token')
 
   authChannel.postMessage('signOut')
@@ -45,8 +43,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
   let isAuthenticated = !!user
 
   function signOut() {
-    console.log('Logout')
-
     destroyCookie(undefined, 'token')
 
     authChannel.postMessage('signOut')
@@ -111,7 +107,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       Router.push('/home')
 
     } catch (error) {
-      console.log(error)
+
       if (error.response) {
         setErrorMessage(error.response.data.error)
       }
