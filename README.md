@@ -16,8 +16,8 @@ git clone https://github.com/taylorbyks/anthorflix.git
 ```
 
 - Inicialização rápida com docker
-  Para facilitar a inicialização deixei o dotenv
-  Ao rodar o comando é criado 3 containers (Postgres, Backend e Frontend)
+  Para facilitar a inicialização deixei o dotenv,
+  ao rodar o comando é criado 3 containers (Postgres, Backend e Frontend)
 
 ```
 cd anthorflix
