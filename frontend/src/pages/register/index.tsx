@@ -12,9 +12,11 @@ import {
 import { yupResolver } from '@hookform/resolvers/yup'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useContext } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { Header, Input, Logo } from '../../components'
+import { AuthContext } from '../../contexts/AuthContext'
 import api from '../../services/api'
 import { withSSRGuest } from '../../utils/withSSRGuest'
 
@@ -40,6 +42,7 @@ const RegisterFormSchema = yup.object().shape({
 export default function Register() {
   const toast = useToast()
   const router = useRouter()
+  const { signIn } = useContext(AuthContext)
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(RegisterFormSchema),
   })
@@ -55,6 +58,8 @@ export default function Register() {
         position: 'bottom-right',
       })
 
+      await signIn({ email: values.email, password: values.password })
+
       return router.push('/home')
     } catch (error) {
       return toast({
@@ -69,7 +74,7 @@ export default function Register() {
   }
 
   return (
-    <Flex direction="column" h="100vh" justify='center'>
+    <Flex direction="column" h="100vh" justify="center">
       <Flex w="80%" my="6" maxWidth={1488} mx="auto" px="6">
         <Box
           as="form"
@@ -79,18 +84,15 @@ export default function Register() {
           p={['6', '8']}
           onSubmit={handleSubmit(handleRegister)}
         >
-          <Flex mb="8" justify="center" align="center">
+          <Flex mb="16" justify="center" align="center">
             <Logo />
           </Flex>
           <Flex mb="8" justify="space-between" align="center">
-            <Heading size="lg" fontWeight="normal" color='white'>
+            <Heading size="lg" fontWeight="normal" color="white">
               Cadastro
             </Heading>
           </Flex>
-          <Divider
-            my="6"
-            borderColor='gray.700'
-          />
+          <Divider my="6" borderColor="gray.700" />
 
           <VStack spacing="8">
             <SimpleGrid minChildWidth="240px" spacing={['6', '8']} w="100%">
@@ -128,7 +130,7 @@ export default function Register() {
           <Flex mt="8" justify="flex-end">
             <HStack spacing="4">
               <Link href="/" passHref>
-                <Button size="sm" fontSize="sm" colorScheme='whiteAlpha'>
+                <Button size="sm" fontSize="sm" colorScheme="whiteAlpha">
                   Cancelar
                 </Button>
               </Link>

@@ -12,10 +12,10 @@ export function SidebarNav() {
     <Stack spacing="8" align="flex-start">
 
       <NavSection title="FILMES">
-        <NavLink icon={RiCalendarCheckFill} href="/home">
+        <NavLink icon={RiFileTextLine} href="/ratings">
           Nova avaliação
         </NavLink>
-        <NavLink icon={RiFileTextLine} href="/ratings">
+        <NavLink icon={RiCalendarCheckFill} href="/home">
           Avaliações
         </NavLink>
       </NavSection>

@@ -5,12 +5,13 @@ import {
   Button,
   Flex,
   Stack,
+  Image
 } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useContext } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import { Input, Logo, NavLink } from '../components'
+import { Input, NavLink } from '../components'
 import { AuthContext } from '../contexts/AuthContext'
 import { withSSRGuest } from '../utils/withSSRGuest'
 import { RiLoginBoxLine } from 'react-icons/ri'
@@ -49,7 +50,7 @@ export default function Login() {
         onSubmit={handleSubmit(handleSignIn)}
       >
         <Stack spacing="4">
-          <Logo />
+        <Image src="/logo.png" alt="anthorflix" width="270" height="79" mb="8"/>
           {errorMessage && (
             <Alert status="error" borderRadius="10">
               <AlertIcon />
