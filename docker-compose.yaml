@@ -1,5 +1,8 @@
 version: '3.7'
 
+networks:
+  anthorflix:
+
 services:
   frontend:
     container_name: frontend
@@ -24,6 +27,8 @@ services:
       - 3000
     depends_on:
       - postgres
+    networks:
+      - anthorflix
   postgres:
     container_name: postgres
     image: postgres
@@ -32,3 +37,5 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - '5432:5432'
+    networks:
+      - anthorflix
